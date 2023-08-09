@@ -1,19 +1,12 @@
-"use strict"
+const item = prompt("Наименование товара");
+const quantity = +(prompt("Количество товара"));
+const category = prompt("Категория товара");
+const price = +(prompt("Цена товара"));
 
-{
-    const product = "Apple Watch Ultra";
-    const quantity = 2;
-    const category = "Watch";
-    const price = 1099;
-
-    console.log(`Общая сумма: ${quantity * price}`);
-}
-
-{
-  const product = "Apple Cortland";
-  const quantity = 5;
-  const category = "food";
-  const price = 8;
-
-  console.log(`Общая сумма: ${quantity * price}`);
-}
+console.log(typeof item);
+console.log(typeof quantity);
+console.log(typeof category);
+console.log(typeof price);
+console.log(
+  `На складе ${quantity} единицы товара "${item}" на сумму ${quantity * price} долларов`
+);
