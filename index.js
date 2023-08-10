@@ -1,12 +1,13 @@
 const item = prompt("Наименование товара");
-const quantity = +(prompt("Количество товара"));
-const category = prompt("Категория товара");
-const price = +(prompt("Цена товара"));
+const quantity = Number(prompt("Количество товара"));
+const price = Number(prompt("Цена товара"));
 
-console.log(typeof item);
-console.log(typeof quantity);
-console.log(typeof category);
-console.log(typeof price);
-console.log(
-  `На складе ${quantity} единицы товара "${item}" на сумму ${quantity * price} долларов`
-);
+if (isNaN(quantity) || isNaN(price)) {
+  console.log("Вы ввели некорректные данные");
+} else {
+  console.log(
+    `На складе ${quantity} единицы товара "${item}" на сумму ${
+      quantity * price
+    } долларов`
+  );
+}
