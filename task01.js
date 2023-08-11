@@ -1,5 +1,3 @@
-const moneyConverter = (evro) => {
-    console.log(evro * 1.2 * 64);
-}
+const moneyConverter = evro => evro * 1.2 * 64;
 
-moneyConverter();
+console.log(moneyConverter(100));
