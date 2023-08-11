@@ -1,5 +1,6 @@
 const reverseString = (str) => {
-    console.log(str.split("").reverse().join(""));
+    return str.split("").reverse().join("");
 }
 
-reverseString();
+const reverse = reverseString("Привет мир");
+console.log('reverse string: ', reverse);
