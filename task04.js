@@ -3,25 +3,28 @@ const calculate = (sum, quantity, promo) => {
 
     if (quantity >= 10) {
         totalSum -= sum * 0.03;
-        console.log(`Товаров больше 10, сумма к оплате ${totalSum}`);
     }
 
     if (sum >= 30000) {
         totalSum -= (sum - 30000) * 0.15;
-        console.log(`Сумма больше 30000, к оплате ${totalSum}`);
     }
 
     if (promo === 'METHED') {
         totalSum -= sum * 0.1;
-        console.log(`Промокод равен "METHED", сумма к оплате ${totalSum}`);
     }
 
     if (promo === 'G3H2Z1' && totalSum >= 2000) {
         totalSum -= 500;
-        console.log(`Промокод равен "G3H2Z1", сумма к оплате ${totalSum}`);
     }
 
-    console.log(`Сумма к оплате ${totalSum}`);
+    return totalSum;
 }
 
-calculate();
+const sum1 = calculate(30000, 3, '');
+console.log('sum1: ', sum1);
+const sum2 = calculate(10000, 10, '');
+console.log("sum2: ", sum2);
+const sum3 = calculate(15000, 2, "METHED");
+console.log("sum3: ", sum3);
+const sum4 = calculate(5000, 1, "G3H2Z1");
+console.log("sum4: ", sum4);
