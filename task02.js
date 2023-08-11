@@ -6,4 +6,5 @@ const changeString = (str) => {
     return newStr;
 }
 
-console.log(changeString("  привет Мир"));
+const string = changeString(" привет Мир");
+console.log("new string: ", string);
