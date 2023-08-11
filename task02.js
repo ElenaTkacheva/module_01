@@ -1,5 +1,9 @@
 const changeString = (str) => {
-    console.log(str.replace(str[0], str[0].toUpperCase()));
+    let newStr = str;
+    newStr = newStr.trim();
+    newStr = newStr.toLowerCase();
+    newStr = newStr.replace(newStr[0], newStr[0].toUpperCase());
+    return newStr;
 }
 
-changeString();
+console.log(changeString("  привет Мир"));
