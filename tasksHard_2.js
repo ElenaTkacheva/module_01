@@ -1,32 +1,40 @@
-const lowTax = 0.13;
-const middleTax = 0.2;
-const highTax = 0.3;
-const firstLimit = 15000;
-const secondLimit = 50000;
+const taxScale = [
+    [.3, 50000],
+    [.2, 15000],
+    [.13, 0]
+]
 
+const balance = +prompt("Какая ваша заработная плата?");
 let tax = 0;
-let balance = +prompt("Какая ваша заработная плата?");
+let rest = balance;
 
+for (let i = 0; i < taxScale.length; i++) {
+    const [rate, limit] = taxScale[i];
 
-if (balance <= 0) {
-    console.log(`Ваш налог составляет: ${tax} `);
-} else {
-    if (balance > secondLimit) {
-        tax = (balance - secondLimit) * highTax;
-        balance = secondLimit;
+    if (rest > limit) {
+        tax += (rest - limit) * rate;
+        rest = limit;
     }
-
-    if (balance > firstLimit) {
-        tax += (balance - firstLimit) * middleTax;
-        balance = firstLimit;
-    }
-
-    if (balance <= firstLimit) {
-        tax += balance * lowTax;
-    }
-
-    console.log(`Ваш налог составляет: ${tax} `);
 }
+
+
+    // if (rest > secondLimit) {
+    //     tax = (rest - secondLimit) * highTax;
+    //     rest = secondLimit;
+    // }
+
+    // if (rest > firstLimit) {
+    //     tax += (rest - firstLimit) * middleTax;
+    //     rest = firstLimit;
+    // }
+
+    // if (rest > 0) {
+    //     tax += rest * lowTax;
+    //     rest = 0;
+    // }
+
+    console.log(`Ваш налог составляет: ${tax} `);
+
 
 
 
