@@ -19,3 +19,5 @@ git diff --color-words
 
 git checkout .  
 git checkout name.file
+
+Тема: ЦИКЛЫ
