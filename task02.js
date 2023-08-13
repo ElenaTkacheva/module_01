@@ -1,17 +1,22 @@
 let num = +prompt('Введите число больше 2: ');
 
-const isPrime = (num) => {
-    if (num < 2) return false;
+if (num < 2) {
+    console.log("Пожалуйста, введите число больше 2");
+} else {
 
-    for (let b = 2; b < num; b++) {
-        if (num % b === 0) {
-            return false;
+    const isPrime = (num) => {
+
+        for (let b = 2; b < num; b++) {
+            if (num % b === 0) {
+                return false;
+            }
         }
-    }
 
-    return true;
+        return true;
+    }
+    console.log(
+    isPrime(num) ? `${num} - это простое число` : `${num} - это составное число`
+    );
 }
 
-console.log(
-    isPrime(num) ? `${num} - это простое число` : `${num} - это составное число`
-);
+
