@@ -1,8 +1,29 @@
-const moneyConverter = evro => evro * 1.2 * 64;
+const allStudents = [
+  "Иванов",
+  "Петров",
+  "Сидоров",
+  "Кузнецов",
+  "Смирнов",
+  "Попов",
+  "Соколов",
+];
+const failedStudents = ["Сидоров", "Смирнов", "Попов"];
 
-const res1 = moneyConverter(100);
-console.log('res1: ', res1);
-const res2 = moneyConverter(0);
-console.log("res2: ", res2);
-const res3 = moneyConverter(5);
-console.log("res3: ", res3);
+let passedStudents = [];
+
+const filter = () => {
+
+    for (let i = 0; i < failedStudents.length; i++) {
+        for (let j = 0; j < failedStudents.length; j++) {
+            if (allStudents[i] !== failedStudents[j]) {
+                passedStudents.push(allStudents[i])
+            }
+        }
+
+    }
+            return passedStudents;
+    
+
+}
+
+console.log(filter());
