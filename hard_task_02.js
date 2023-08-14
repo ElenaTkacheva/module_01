@@ -1,11 +1,6 @@
 const num1 = +prompt("Введите первое число: ");
 const num2 = +prompt("Введите второе число: ");
 
-const minNumber = (num1, num2) => {
+const minNumber = (num1, num2) => (num1 < num2) * num1 + (num2 < num1) * num2;
 
-    if (!Number.isInteger(num1) || !Number.isInteger(num2)) console.log("Введите число!");
-    if (num1 < num2) return num1;
-    return num2;
-
-}
-console.log(!minNumber(num1, num2) ? "" : minNumber(num1, num2));
+console.log(!minNumber(num1, num2) ? "Введите число" : minNumber(num1, num2));
