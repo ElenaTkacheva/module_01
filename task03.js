@@ -7,14 +7,12 @@ const generateArray = (length, m, n, parity) => {
     const randomNum = Math.floor(Math.random() * range) + minNum;
 
     if (
-      (randomNum % 2 === 0 && parity === "even") ||
-      (randomNum % 2 === 1 && parity === "odd")
-    ) {
-      newArr.push(randomNum);
-    }
+        (randomNum % 2 === 0 && parity === "even") ||
+        (randomNum % 2 !== 0 && parity === "odd")
+    ) newArr.push(randomNum);
   }
   return newArr;
 };
 
 console.log(generateArray(10, -30, 50, 'even'));
-console.log(generateArray(8, 100, -1000, 'odd'));
+console.log(generateArray(8, 100, -100, 'odd'));

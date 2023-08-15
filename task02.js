@@ -4,7 +4,9 @@ const generateArray = (length, m, n) => {
   const minNum = Math.min(m, n);
 
   for (let i = 0; i < newArr.length; i++) {
-    newArr[i] = Math.floor(Math.random() * range) + minNum;
+    const randomNum = Math.floor(Math.random() * range) + minNum;
+
+    newArr[i] = randomNum;
   }
   return newArr;
 };
