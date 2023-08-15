@@ -1,18 +1,4 @@
-const allStudents = [
-  "Иванов",
-  "Петров",
-  "Сидоров",
-  "Кузнецов",
-  "Смирнов",
-  "Попов",
-  "Соколов",
-];
-const failedStudents = ["Сидоров", "Смирнов", "Попов"];
+const generateArray = (length) =>
+  [...new Array(length)].map(() => Math.floor(Math.random() * 100) + 1);
 
-let passedStudents = [];
-
-const filter = () => {
-    return passedStudents = allStudents.filter(i => failedStudents.indexOf(i) < 0)
-}
-
-console.log(filter());
+console.log(generateArray(10));
