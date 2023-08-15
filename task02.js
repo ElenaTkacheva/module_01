@@ -1,4 +1,10 @@
-const generateArray = (length, n, m) =>
-  [...new Array(length)].map(() => Math.floor(Math.random(n, m) * 100) + 1);
+const generateArray = (length, m, n) => {
+  const newArr = [...Array(length)];
+  const range = Math.abs(n -m) + 1;
+  for (let i = 0; i < newArr.length; i++) {
+    newArr[i] = Math.floor(Math.random() * range) + m;
+  }
+  return newArr;
+};
 
-console.log(generateArray(10, -1, -100));
+console.log(generateArray(10, -50, 50));
