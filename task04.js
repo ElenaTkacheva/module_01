@@ -9,16 +9,13 @@ const allСashbox = [
   [1, 370],
 ];
 
-const getAveragePriceGoods = (allСashbox) => {
-
-  const [endQuant, endSum] = allСashbox.reduce(
-    ([startQuant, startSum], [quant, sum]) => {
-      return [startQuant + quant, startSum + sum];
-    },
+const getAveragePriceGoods = (allСashbox) => allСashbox.reduce(
+    ([totalQuant, totalSum], [quant, sum]) => 
+    ([totalQuant + quant, totalSum + sum])
+    ,
     [0, 0]
-  );
+  ).reduce((totalQuant, totalSum) => 
+  Math.round(+(totalSum / totalQuant).toFixed(2)));
 
-    return Math.round(+(endSum / endQuant).toFixed(2));
-}
 
 console.log(getAveragePriceGoods(allСashbox));
