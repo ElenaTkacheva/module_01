@@ -7,23 +7,26 @@ const guessTheNumber = () => {
   while (true) {
     let userNumber = prompt("Введите любое число от 1 до 100");
 
-    if (isNaN(userNumber)) {
+    switch(true) {
+      case isNaN(userNumber):
       alert("Введите число!");
-      continue;
-    }
+      break;
 
-    if (userNumber === null) {
+      case userNumber === null: 
       alert("Игра закончена");
       break;
-    }
 
-    if (parseInt(userNumber) === randomNumber) {
-      alert("Правильно!");
-      break;
-    } else if (parseInt(userNumber) > randomNumber) {
+      case (parseInt(userNumber) > randomNumber): 
       alert("Меньше!");
-    } else if (parseInt(userNumber) < randomNumber) {
+      break;
+
+      case (parseInt(userNumber) < randomNumber):
       alert("Больше!");
+      break;
+
+      case (parseInt(userNumber) === randomNumber): 
+      alert("Правильно!");
+      false;
     }
   }
 };
