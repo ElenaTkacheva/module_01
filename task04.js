@@ -1,17 +1,21 @@
 const leapYear = (m, n) => {
-  let arr = [];
-  for (let i = m, j = 0; i <= n; i++, j++) {
-    arr[j] = i;
+  const arr = [];
+  const range = Math.abs(n - m);
+  const minNum = Math.min(m, n);
+
+  for (let i = minNum; i <= range; i++) {
+    if (
+      (i % 4 === 0 && i % 100 !== 0) ||
+      (year % 100 === 0 && year % 400 === 0)
+    ) {
+      arr.push(i);
+    } 
   }
 
-  return arr
-    .map((year) =>
-      (year % 4 === 0 && year % 100 !== 0) ||
-      (year % 100 === 0 && year % 400 === 0)
-        ? year
-        : false
-    )
-    .filter((year) => parseInt(year));
+  return arr;
 }
 
-console.log(leapYear(-10, 2000));
+
+
+console.log(leapYear(-10, 1000));
+console.log(leapYear(2000, 1800));

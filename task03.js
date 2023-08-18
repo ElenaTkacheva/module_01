@@ -1,15 +1,20 @@
-const generateArray = (length, m, n, parity) => {
+const generateArray = (length, m, n, ) => {
   const newArr = [];
   const range = Math.abs(n - m) + 1;
   const minNum = Math.min(m, n);
+//   if (parity && !["even", "odd"].includes(parity)) return [];
 
   while (newArr.length < length) {
+
     const randomNum = Math.floor(Math.random() * range) + minNum;
 
-    if (
-        (randomNum % 2 === 0 && parity === "even") ||
-        (randomNum % 2 !== 0 && parity === "odd")
-    ) newArr.push(randomNum);
+    if (newArr.includes(!'even')) return newArr;
+    if (parity) {
+      const evenNum = randomNum % 2;
+      if (parity === "even" && evenNum) continue;
+      if (parity === "odd" && !evenNum) continue;
+    }
+    newArr.push(randomNum);
   }
   return newArr;
 };
