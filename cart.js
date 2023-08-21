@@ -21,8 +21,8 @@ const cart = {
     this.totalPrice = this.items.reduce((acc, item) => acc + (item.price * item.count), 0);
   },
 
-  increaseCount() {
-    this.count = this.items.reduce((acc, { qty }) => acc + qty, 0);
+  increaseCount(qnty) {
+    this.count += qnty;
   },
 
   clear() {
