@@ -3,46 +3,45 @@ const cart = {
   totalPrice: 0,
   count: 0,
 
+  getTotalPrice() {
+    return this.totalPrice;
+  },
+
   add(product, price, count) {
     this.items.push({
       product,
       price,
       count,
     });
-    this.increaseCount();
+    this.increaseCount(count);
     this.calculateItemPrice();
   },
 
-  getTotalPrice() {
-    this.totalPrice;
-  },
-
   calculateItemPrice() {
-    this.totalPrice +=
-      this.items[this.items.length - 1].price *
-      this.items[this.items.length - 1].qty;
-    console.log(this.totalPrice);
+    this.totalPrice = this.items.reduce((acc, item) => acc + (item.price * item.count), 0);
   },
 
   increaseCount() {
     this.count = this.items.reduce((acc, { qty }) => acc + qty, 0);
-    console.log(this.count);
   },
 
   clear() {
-    this.items.length = 0;
+    this.items.length = [];
     this.totalPrice = 0;
     this.count = 0;
   },
 
   print() {
-    const basket = JSON.stringify(this.items);
-    console.log(basket + "\n" + this.totalPrice);
+    const cart = JSON.stringify(this.items);
+    console.log(cart + "\n" + this.totalPrice);
   },
 };
 
 cart.add('apple', 5, 10);
-cart.add('pear', 8, 8);
-cart.add('nectarin', 6, 12);
+cart.add('pear', 13, 3);
+cart.add('nectarin', 12, 2);
 cart.print();
-cart.totalPrice;
+cart.add('carrot', 3, 1);
+cart.print();
+
+
