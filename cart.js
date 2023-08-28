@@ -1,11 +1,6 @@
 const cart = {
   items: [],
-  totalPrice: 0,
   count: 0,
-
-  getTotalPrice() {
-    return this.totalPrice;
-  },
 
   add(product, price, count) {
     this.items.push({
@@ -14,20 +9,22 @@ const cart = {
       count,
     });
     this.increaseCount(count);
-    this.calculateItemPrice();
   },
 
-  calculateItemPrice() {
-    this.totalPrice = this.items.reduce((acc, item) => acc + (item.price * item.count), 0);
+  get totalPrice() {
+    return this.calculateItemPrice();
   },
-
+  
   increaseCount(qnty) {
     this.count += qnty;
   },
 
+  calculateItemPrice() {
+    return this.items.reduce((acc, item) => acc + item.price * item.count, 0);
+  },
+
   clear() {
     this.items.length = [];
-    this.totalPrice = 0;
     this.count = 0;
   },
 
