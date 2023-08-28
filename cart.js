@@ -1,3 +1,5 @@
+'use strict';
+
 const cart = {
   items: [],
   count: 0,
@@ -14,7 +16,7 @@ const cart = {
   get totalPrice() {
     return this.calculateItemPrice();
   },
-  
+
   increaseCount(qnty) {
     this.count += qnty;
   },
@@ -30,7 +32,7 @@ const cart = {
 
   print() {
     const cart = JSON.stringify(this.items);
-    console.log(cart + "\n" + this.totalPrice);
+    console.log(cart + '\n' + this.totalPrice);
   },
 };
 
@@ -40,5 +42,3 @@ cart.add('nectarin', 12, 2);
 cart.print();
 cart.add('carrot', 3, 1);
 cart.print();
-
-

@@ -20,4 +20,4 @@ git diff --color-words
 git checkout .  
 git checkout name.file
 
-ТЕМА:  Objects
+ТЕМА:  ESLint
