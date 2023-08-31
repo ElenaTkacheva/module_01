@@ -3,6 +3,7 @@
 const cart = {
   items: [],
   count: 0,
+  _discount: 0,
 
   add(product, price, count) {
     this.items.push({
@@ -22,12 +23,25 @@ const cart = {
   },
 
   calculateItemPrice() {
-    return this.items.reduce((acc, item) => acc + item.price * item.count, 0);
+    const totalPrice = this.items.reduce((acc, item) =>
+      acc + item.price * item.count, 0);
+
+    if (this._discount > 0) {
+      return totalPrice - (totalPrice * this._discount / 100);
+    }
+
+    return totalPrice;
+  },
+
+  set discount(promocode) {
+    if (promocode === 'METHED') this._discount = 15;
+    if (promocode === 'NEWYEAR') this._discount = 21;
   },
 
   clear() {
-    this.items.length = [];
+    this.items = [];
     this.count = 0;
+    this._discount = 0;
   },
 
   print() {
@@ -37,8 +51,10 @@ const cart = {
 };
 
 cart.add('apple', 5, 10);
-cart.add('pear', 13, 3);
-cart.add('nectarin', 12, 2);
+cart.add('pear', 10, 3);
+cart.add('nectarin', 10, 2);
 cart.print();
-cart.add('carrot', 3, 1);
+cart.discount = 'METHED';
+cart.print();
+cart.discount = 'NEWYEAR';
 cart.print();
