@@ -33,7 +33,7 @@ const cart = {
     return totalPrice;
   },
 
-  set discount(promocode) {
+  set setDiscount(promocode) {
     if (promocode === 'METHED') this._discount = 15;
     if (promocode === 'NEWYEAR') this._discount = 21;
   },
@@ -54,7 +54,7 @@ cart.add('apple', 5, 10);
 cart.add('pear', 10, 3);
 cart.add('nectarin', 10, 2);
 cart.print();
-cart.discount = 'METHED';
+cart.setDiscount = 'METHED';
 cart.print();
-cart.discount = 'NEWYEAR';
+cart.setDiscount = 'NEWYEAR';
 cart.print();
