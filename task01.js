@@ -1,10 +1,8 @@
 'use strict';
 
-const guessTheNumber = () => {
-  const min = Math.ceil(1);
-  const max = Math.floor(100);
+const randomNumber = () => Math.floor(Math.random() * 100) + 1;
 
-  const randomNumber = Math.floor(Math.random() * (max - min)) + min;
+const guessTheNumber = (num) => {
   const userNumber = prompt('Введите любое число от 1 до 100');
 
   switch (true) {
@@ -14,22 +12,22 @@ const guessTheNumber = () => {
 
     case userNumber === null:
       alert('Игра закончена');
-      break;
+      return;
 
-    case parseInt(userNumber) > randomNumber:
+    case parseInt(userNumber) > num:
       alert('Меньше!');
       break;
 
-    case parseInt(userNumber) < randomNumber:
+    case parseInt(userNumber) < num:
       alert('Больше!');
       break;
 
-    case parseInt(userNumber) === randomNumber:
+    case parseInt(userNumber) === num:
       alert('Правильно!');
-      false;
+      return;
   }
 
-  guessTheNumber();
+  guessTheNumber(num);
 };
 
 const game = () => {
