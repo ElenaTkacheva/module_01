@@ -32,10 +32,9 @@ const guessTheNumber = (num) => {
 
 const game = () => {
   const number = randomNumber();
-
   guessTheNumber(number);
 
-  return number;
+  return `Загаданное число ${number}`;
 };
 
 console.log(game());
