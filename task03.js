@@ -1,25 +1,25 @@
 'use strict';
 
 const rectangle = {
-  width: 5,
-  height: 5,
+  _width: 5,
+  _height: 5,
 
-  set setWidth(sm) {
-    if (sm > 0) this.width = sm;
+  set width(sm) {
+    if (sm > 0) this._width = sm;
   },
-  set setHeight(sm) {
-    if (sm > 0) this.height = sm;
+  set height(sm) {
+    if (sm > 0) this._height = sm;
   },
 
-  get perimeterRectangle() {
-    return `${2 * (this.width + this.height)}cm`;
+  get perimeter() {
+    return `${2 * (this._width + this._height)}cm`;
   },
-  get areaRectangle() {
-    return `${this.width * this.height}cm`;
+  get area() {
+    return `${this._width * this._height}cm`;
   },
 };
 
-rectangle.setWidth = 8;
-rectangle.setHeight = 10;
-console.log(rectangle.perimeterRectangle);
-console.log(rectangle.areaRectangle);
+rectangle.width = 8;
+rectangle.height = 10;
+console.log(rectangle.perimeter);
+console.log(rectangle.area);
