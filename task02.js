@@ -1,10 +1,12 @@
 'use strict';
 
 const recursion = (array) => {
-  const newArray = [Math.floor(Math.random() * 11), ...array];
-
-  return newArray.reduce((acc, num) => acc + num) >= 50 ?
-    newArray : recursion(newArray);
+  const newNum = Math.floor(Math.random() * 11);
+  array.push(newNum);
+  const sum = array.reduce((acc, num) => acc + num);
+  if (sum >= 50) {
+    return array;
+  } else return recursion(array);
 };
 
 console.log(recursion([8, 10, 12]));
