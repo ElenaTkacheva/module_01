@@ -1,102 +1,153 @@
 'use strict';
 
 (() => {
-  const FIGURES_RUS = {
-    ножницы: 'камень',
-    камень: 'бумага',
-    бумага: 'ножницы',
+  const MARBLES = {
+    userCount: 5,
+    botCount: 5,
+    playerOne: 'Игрок',
+    playerTwo: 'Бот',
+
+    corrNumber() {
+      if (this.userCount > 10) {
+        this.userCount = 10;
+        this.botCount = 0;
+      }
+
+      if (this.botCount > 10) {
+        this.userCount = 0;
+        this.botCount = 10;
+      }
+    },
+
+    changeCount(ballCount, computerQuestion) {
+      const multiplyer = this.playerOne === 'Бот' ? 1 : -1;
+
+      if (ballCount % 2 === computerQuestion) {
+        this.botCount -= ballCount * multiplyer;
+        this.userCount += ballCount * multiplyer;
+      } else {
+        this.botCount += ballCount * multiplyer;
+        this.userCount -= ballCount * multiplyer;
+      }
+      this.corrNumber();
+    },
+
+    reset() {
+      this.userCount = 5;
+      this.botCount = 5;
+    },
+
+    get getCount() {
+      return `Количество шариков: 
+        Бот: ${this.botCount}
+        Игрок: ${this.userCount}`;
+    },
+
+    get winner() {
+      if (this.userCount >= 10) {
+        return `Вы победили!\n${this.getCount}`;
+      }
+      return `Бот победил!\n${this.getCount}`;
+    },
+
+    set whoPlayerOne(player) {
+      this.playerOne = player;
+    },
+
+    set whoPlayerTwo(player) {
+      this.playerTwo = player;
+    },
   };
 
-  const getRandomIntInclusive = (min, max) => {
+  const startRSP = window.RSP();
+
+  const getRandomNumber = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
   const game = () => {
-    const lang = Object.keys(FIGURES_RUS);
+    const checkCorrNumber = () => {
+      const userNum = prompt('Загадайте число шариков');
 
-    const victory = FIGURES_RUS;
-
-    const result = {
-      player: 0,
-      computer: 0,
-      get winner() {
-        return this.player > this.computer ? 'Вы выиграли!' :
-          this.player < this.computer ? 'Вы проиграли' : 'Ничья!';
-      },
-    };
-
-    const announceWinner = (userWord, computerWord, winner) => {
-      alert(`Компьютер: ${computerWord}
-        Игрок: ${userWord}
-        Итог игры: ${winner}`);
-    };
-
-    const checkCorrect = (str, arr) => {
-      let i = 0;
-      if (str === null) {
+      if (userNum === null) {
         return null;
       }
 
-      const word = (str) => {
-        if (i >= arr.length) {
-          return null;
-        } else if (str.toLowerCase()[0] === arr[i][0] &&
-          arr[i].includes(str.toLowerCase())) {
-          return arr[i];
+      if (!Number.isNaN(parseInt(userNum))) {
+        if (userNum > MARBLES.userCount) {
+          alert('Число должно быть меньше');
+        } else if (userNum < 1) {
+          alert('Загадайте как минимум 1');
+        } else {
+          return +userNum;
         }
-        i++;
-        return word(str);
-      };
-      return word(str.trim());
-    };
-
-    const chooseWinner = (userWord, computerWord, winner) => {
-      if (userWord === winner) {
-        result.player += 1;
-        announceWinner(userWord, computerWord, 'Вы выиграли!');
       } else {
-        result.computer += 1;
-        announceWinner(userWord, computerWord, 'Вы проиграли');
+        alert('Введите число!');
       }
+      return checkCorrNumber();
     };
 
-    return function start() {
-      const play = () => {
-        const userWord = prompt(`${lang.join(', ')}?`);
-        const computerWord = lang[getRandomIntInclusive(0, 2)];
-        const correctWord = checkCorrect(userWord, lang);
+    const whoMove = (move) => {
+      if (move === null) {
+        return [null, null];
+      }
 
-        if (userWord === null) {
-          if (confirm('Точно ли вы хотите выйти?')) {
-            return null;
-          }
+      if (move % 2 === 0) {
+        const playerOne = checkCorrNumber();
+        const playerTwo =
+        MARBLES.userCount === 1 ? 1 : getRandomNumber(0, 1);
+        MARBLES.whoPlayerOne = 'Игрок';
+        MARBLES.whoPlayerTwo = 'Бот';
+
+        return [playerOne, playerTwo];
+      }
+
+      const playerOne = getRandomNumber(1, MARBLES.botCount);
+      const playerTwo = +!confirm('Число четное?');
+      MARBLES.whoPlayerOne = 'Бот';
+      MARBLES.whoPlayerTwo = 'Игрок';
+
+      return [playerOne, playerTwo];
+    };
+
+    return function start(move = 0) {
+      const play = (move) => {
+        const [playerOne, playerTwo] = whoMove(move);
+
+        if (playerOne === null) {
+          return null;
         }
 
-        if (correctWord) {
-          if (correctWord === computerWord) {
-            announceWinner(correctWord, computerWord, 'Ничья!');
-          } else {
-            chooseWinner(
-              correctWord,
-              computerWord,
-              victory[lang[lang.indexOf(computerWord)]],
-            );
-          }
+        MARBLES.changeCount(playerOne, playerTwo);
 
-          if (!confirm('Еще?')) {
+        switch (true) {
+          case MARBLES.userCount <= 0:
+          case MARBLES.userCount >= 10:
+            alert(MARBLES.winner);
+            if (confirm('Сыграем еще разок?')) {
+              MARBLES.reset();
+              return 1;
+            }
             return null;
-          }
+          case playerOne % 2 === playerTwo:
+            alert(`${MARBLES.playerTwo} угадал!\n${MARBLES.getCount}`);
+            break;
+          default:
+            alert(`${MARBLES.playerTwo} ошибся\n${MARBLES.getCount}`);
         }
-
-        play();
+        return play(++move);
       };
 
-      play();
-      announceWinner(result.player, result.computer, result.winner);
+      while (true) {
+        const result = play(startRSP());
+        if (result === null) {
+          return null;
+        }
+      }
     };
   };
 
-  window.RPS = game;
+  window.marbles = game;
 })();
