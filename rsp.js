@@ -6,13 +6,13 @@
     winner: 0,
 
     whoWinner() {
-      const ind = this.figure.indexOf(this.userWord);
+      const i = this.figure.indexOf(this.userWord);
 
-      if (this.figure[ind] === this.computerWord) {
+      if (this.figure[i] === this.computerWord) {
         this.winner = 0;
-      } else if (ind === 2 && this.figure[0] === this.computerWord) {
+      } else if (i === 2 && this.figure[0] === this.computerWord) {
         this.winner = 1;
-      } else if (this.figure[ind + 1] === this.computerWord) {
+      } else if (this.figure[i + 1] === this.computerWord) {
         this.winner = 1;
       } else {
         this.winner = 2;
