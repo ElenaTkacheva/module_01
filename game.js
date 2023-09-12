@@ -20,14 +20,14 @@
     },
 
     changeCount(ballCount, computerQuestion) {
-      const multiplyer = this.playerOne === 'Бот' ? 1 : -1;
+      const multiplayer = this.playerOne === 'Бот' ? 1 : -1;
 
       if (ballCount % 2 === computerQuestion) {
-        this.botCount -= ballCount * multiplyer;
-        this.userCount += ballCount * multiplyer;
+        this.botCount -= ballCount * multiplayer;
+        this.userCount += ballCount * multiplayer;
       } else {
-        this.botCount += ballCount * multiplyer;
-        this.userCount -= ballCount * multiplyer;
+        this.botCount += ballCount * multiplayer;
+        this.userCount -= ballCount * multiplayer;
       }
       this.corrNumber();
     },
